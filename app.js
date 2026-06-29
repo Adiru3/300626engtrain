@@ -413,8 +413,8 @@ function updateGlobalStats() {
 // ==========================================================================
 
 function initVocabSession() {
-    // Generate a session list of 10 random words
-    State.vocabSessionList = shuffleArray(VOCABULARY).slice(0, 10);
+    // Generate a session list of all words
+    State.vocabSessionList = shuffleArray(VOCABULARY);
     State.vocabCurrentIndex = 0;
     State.fcIndex = 0;
     
