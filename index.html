@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexiFlow - English Vocabulary & Retelling Portal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">⚡</div>
+                <span class="logo-text">LexiFlow</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-tab="dashboard-tab">
+                    <span class="btn-icon">📊</span> Dashboard
+                </button>
+                <button class="nav-btn" data-tab="vocab-tab">
+                    <span class="btn-icon">📝</span> Vocabulary Quiz
+                </button>
+                <button class="nav-btn" data-tab="journey-tab">
+                    <span class="btn-icon">✈️</span> Journeys (Plane/Train)
+                </button>
+                <button class="nav-btn" data-tab="internet-tab">
+                    <span class="btn-icon">🌐</span> Internet Q&A
+                </button>
+            </nav>
+            <div class="sidebar-stats">
+                <div class="stat-mini">
+                    <div class="stat-mini-val" id="sb-vocab-count">0/30</div>
+                    <div class="stat-mini-label">Words Mastered</div>
+                </div>
+                <div class="stat-mini">
+                    <div class="stat-mini-val" id="sb-speech-score">0%</div>
+                    <div class="stat-mini-label">Avg. Retell Score</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-title">
+                    <h1 id="page-heading">Dashboard Overview</h1>
+                    <p class="header-subtitle" id="page-subheading">Track your progress and select a training module.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="sound-toggle-btn" title="Toggle Sound Effects">
+                        <span id="sound-icon">🔊</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB 1: DASHBOARD -->
+            <section id="dashboard-tab" class="tab-content active">
+                <div class="grid-layout">
+                    <!-- Progress Card -->
+                    <div class="dashboard-card hero-card">
+                        <div class="hero-card-content">
+                            <h2>Welcome back to LexiFlow!</h2>
+                            <p>Ready to improve your English? Study vocabulary from the syllabus, analyze stories, and practice speaking with real-time feedback using our AI Retelling Validator.</p>
+                            <div class="hero-actions">
+                                <button class="btn btn-primary start-training-btn" data-target="vocab-tab">Start Vocabulary Quiz</button>
+                                <button class="btn btn-secondary start-training-btn" data-target="journey-tab">Practice Journeys</button>
+                            </div>
+                        </div>
+                        <div class="hero-card-illustration">⚡</div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="stat-cards-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon vocab-color">📚</div>
+                            <div class="stat-info">
+                                <span class="stat-val" id="stat-vocab-pct">0%</span>
+                                <span class="stat-lbl">Vocabulary Learned</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon journey-color">🚄</div>
+                            <div class="stat-info">
+                                <span class="stat-val" id="stat-journey-progress">0/2</span>
+                                <span class="stat-lbl">Stories Retold</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon internet-color">🌐</div>
+                            <div class="stat-info">
+                                <span class="stat-val" id="stat-internet-progress">0/5</span>
+                                <span class="stat-lbl">Internet Q&As Mastered</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Training Hub -->
+                    <div class="dashboard-card full-width">
+                        <h3>Your Study Checklist</h3>
+                        <div class="checklist-grid">
+                            <div class="checklist-item" id="check-vocab">
+                                <div class="check-box"></div>
+                                <div class="check-text">
+                                    <strong>Master Vocabulary List (30 Words)</strong>
+                                    <p>Practice with flashcards, multiple choice quizzes, and word matching.</p>
+                                </div>
+                                <button class="btn btn-sm btn-outline start-training-btn" data-target="vocab-tab">Train</button>
+                            </div>
+                            <div class="checklist-item" id="check-journey">
+                                <div class="check-box"></div>
+                                <div class="check-text">
+                                    <strong>Retell Rosemary & Charles's Journeys</strong>
+                                    <p>Memorize travel details, arrange timelines, and practice oral retelling.</p>
+                                </div>
+                                <button class="btn btn-sm btn-outline start-training-btn" data-target="journey-tab">Train</button>
+                            </div>
+                            <div class="checklist-item" id="check-internet">
+                                <div class="check-box"></div>
+                                <div class="check-text">
+                                    <strong>Explain "What is the Internet?"</strong>
+                                    <p>Learn 5 key Q&As, fill in missing words, and retell them orally.</p>
+                                </div>
+                                <button class="btn btn-sm btn-outline start-training-btn" data-target="internet-tab">Train</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: VOCABULARY QUIZ -->
+            <section id="vocab-tab" class="tab-content">
+                <div class="vocab-layout">
+                    <!-- Left Column: Controls & Game Area -->
+                    <div class="vocab-workspace">
+                        <!-- Mode Selector Header -->
+                        <div class="vocab-header-panel">
+                            <div class="mode-buttons">
+                                <button class="mode-btn active" data-mode="quiz-eng-ukr">Multiple Choice (EN → UA)</button>
+                                <button class="mode-btn" data-mode="quiz-ukr-eng">Multiple Choice (UA → EN)</button>
+                                <button class="mode-btn" data-mode="flashcards">Flashcards</button>
+                                <button class="mode-btn" data-mode="matching">Matching Game</button>
+                            </div>
+                            <button class="btn btn-secondary btn-icon-only" id="vocab-reroll-btn" title="Reroll list (New random selection)">
+                                🔄 Reroll List
+                            </button>
+                        </div>
+
+                        <!-- Active Quiz/Flashcard Panel -->
+                        <div class="vocab-card-container">
+                            <!-- Multiple Choice Container -->
+                            <div id="mc-container" class="vocab-game-view">
+                                <div class="vocab-progress-bar-container">
+                                    <div class="vocab-progress-fill" id="mc-progress-fill"></div>
+                                </div>
+                                <div class="vocab-question-header">
+                                    <span class="vocab-number" id="mc-counter">Question 1/10</span>
+                                    <button class="audio-btn" id="mc-audio-btn" title="Listen Pronunciation">🔊</button>
+                                </div>
+                                <h2 class="vocab-question-text" id="mc-question-word">access</h2>
+                                <div class="mc-options-grid" id="mc-options">
+                                    <!-- Options generated dynamically -->
+                                </div>
+                                <div class="quiz-feedback-banner" id="mc-feedback">
+                                    <!-- Correct/Incorrect message -->
+                                </div>
+                            </div>
+
+                            <!-- Flashcard Container -->
+                            <div id="fc-container" class="vocab-game-view" style="display: none;">
+                                <div class="fc-wrapper">
+                                    <div class="flashcard" id="flashcard-element">
+                                        <div class="flashcard-inner">
+                                            <div class="flashcard-front">
+                                                <button class="audio-btn fc-audio" id="fc-audio-btn" title="Listen Pronunciation">🔊</button>
+                                                <h2 id="fc-word-front">access</h2>
+                                                <p class="click-hint">Click card to reveal translation</p>
+                                            </div>
+                                            <div class="flashcard-back">
+                                                <h2 id="fc-word-back">доступ</h2>
+                                                <p class="click-hint">Click card to flip back</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fc-controls">
+                                    <button class="btn btn-outline" id="fc-prev-btn">⬅️ Previous</button>
+                                    <button class="btn btn-danger" id="fc-no-btn">❌ Learn Again</button>
+                                    <button class="btn btn-success" id="fc-yes-btn">✅ I Know It</button>
+                                    <button class="btn btn-outline" id="fc-next-btn">Next ➡️</button>
+                                </div>
+                                <div class="fc-counter" id="fc-counter-label">Card 1/30</div>
+                            </div>
+
+                            <!-- Matching Game Container -->
+                            <div id="match-container" class="vocab-game-view" style="display: none;">
+                                <div class="match-instructions">Match the English words with their Ukrainian translations by clicking them.</div>
+                                <div class="match-grid">
+                                    <div class="match-column" id="match-cols-eng">
+                                        <!-- English words -->
+                                    </div>
+                                    <div class="match-column" id="match-cols-ukr">
+                                        <!-- Ukrainian translations -->
+                                    </div>
+                                </div>
+                                <div class="match-footer">
+                                    <span id="match-timer">Time: 0.0s</span>
+                                    <button class="btn btn-primary" id="match-reset-btn">Play Again</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TAB 3: JOURNEYS (ROSEMARY & CHARLES) -->
+            <section id="journey-tab" class="tab-content">
+                <div class="journey-layout">
+                    <!-- Top Navigation Tabs for Rosemary vs Charles -->
+                    <div class="journey-selector">
+                        <button class="journey-sel-btn active" data-journey="rosemary">
+                            <span>✈️</span> Rosemary's Journey (Plane)
+                        </button>
+                        <button class="journey-sel-btn" data-journey="charles">
+                            <span>🚄</span> Charles's Journey (Train)
+                        </button>
+                    </div>
+
+                    <!-- Layout: Split content (Left: Text & Study, Right: Timeline / Retell Studio) -->
+                    <div class="journey-workspace-grid">
+                        
+                        <!-- Left Panel: Text & Sentences with Translation -->
+                        <div class="panel study-panel">
+                            <div class="panel-header">
+                                <h3 id="story-title">Rosemary's Journey (By Plane)</h3>
+                                <div class="translation-toggle-group">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="story-translation-toggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span>Show Translations</span>
+                                </div>
+                            </div>
+                            
+                            <div class="story-content-container" id="story-sentences-list">
+                                <!-- Sentences dynamically rendered with click-to-translate & text-to-speech -->
+                            </div>
+
+                            <!-- Timeline ordering mini-game -->
+                            <div class="timeline-game-container">
+                                <div class="timeline-header">
+                                    <h4>Arrange the Timeline</h4>
+                                    <p>Put the events in chronological order to master the storyline.</p>
+                                </div>
+                                <div class="timeline-slots-container" id="timeline-slots">
+                                    <!-- Dynamic drag-and-drop or click-to-sort blocks -->
+                                </div>
+                                <button class="btn btn-outline btn-sm" id="timeline-check-btn">Verify Order</button>
+                                <span class="timeline-feedback" id="timeline-feedback-label"></span>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Oral Retell Studio -->
+                        <div class="panel retell-panel">
+                            <div class="panel-header">
+                                <h3>🎙️ Oral Retelling Studio</h3>
+                                <span class="badge" id="retell-score-badge">0% Coverage</span>
+                            </div>
+                            
+                            <p class="retell-guide">
+                                Try to retell the story aloud or type it in English. 
+                                Mention key facts (departure time, travel modes, difficulties, speed, duration, cost, ratings) to achieve 100% coverage.
+                            </p>
+
+                            <!-- Speech Recognition Buttons -->
+                            <div class="retell-audio-controls">
+                                <button class="btn btn-accent" id="record-btn">
+                                    <span id="record-icon">🎤</span> <span id="record-text">Start Recording</span>
+                                </button>
+                                <span class="recording-status" id="recording-status-msg">Click mic & start speaking in English...</span>
+                            </div>
+
+                            <!-- Text area for input / live transcript -->
+                            <div class="text-input-area">
+                                <textarea id="retell-textarea" placeholder="Speak or start typing your retelling here in English..."></textarea>
+                            </div>
+
+                            <!-- Live Checklist of Key Facts -->
+                            <div class="fact-checklist-section">
+                                <h4>Key Facts & Details checklist</h4>
+                                <ul class="fact-checklist" id="fact-checklist-items">
+                                    <!-- Key items to trigger -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: INTERNET Q&A -->
+            <section id="internet-tab" class="tab-content">
+                <div class="internet-layout">
+                    <!-- Q&A Left panel selector -->
+                    <div class="qa-sidebar">
+                        <h3>Internet Q&As</h3>
+                        <div class="qa-menu" id="qa-menu-list">
+                            <button class="qa-menu-btn active" data-qindex="0">1. What is the Internet?</button>
+                            <button class="qa-menu-btn" data-qindex="1">2. What do you use it for?</button>
+                            <button class="qa-menu-btn" data-qindex="2">3. How has it changed the world?</button>
+                            <button class="qa-menu-btn" data-qindex="3">4. Pros of the Internet</button>
+                            <button class="qa-menu-btn" data-qindex="4">5. Cons of the Internet</button>
+                        </div>
+                    </div>
+
+                    <!-- Q&A Workspace grid -->
+                    <div class="internet-workspace-grid">
+                        
+                        <!-- Panel: Read & Cloze test -->
+                        <div class="panel qa-study-panel">
+                            <div class="panel-header">
+                                <h3 id="qa-card-title">1. What is the Internet?</h3>
+                            </div>
+                            
+                            <!-- Bilingual Flip Card -->
+                            <div class="qa-flip-card-wrapper">
+                                <div class="qa-flip-card" id="qa-flip-card-element">
+                                    <div class="qa-flip-card-inner">
+                                        <div class="qa-flip-card-front">
+                                            <p class="qa-q-label">QUESTION</p>
+                                            <h4 class="qa-q-text" id="qa-disp-q-en">What is the Internet?</h4>
+                                            <p class="qa-a-label">ANSWER</p>
+                                            <p class="qa-a-text" id="qa-disp-a-en">The Internet is a global open-architecture network that consists of multiple computers...</p>
+                                            <div class="qa-flip-action">Click card to show Ukrainian Translation</div>
+                                        </div>
+                                        <div class="qa-flip-card-back">
+                                            <p class="qa-q-label">ПИТАННЯ</p>
+                                            <h4 class="qa-q-text" id="qa-disp-q-ua">Що таке Інтернет?</h4>
+                                            <p class="qa-a-label">ВІДПОВІДЬ</p>
+                                            <p class="qa-a-text" id="qa-disp-a-ua">Інтернет — це глобальна мережа з відкритою архітектурою, яка складається з багатьох комп'ютерів...</p>
+                                            <div class="qa-flip-action">Click card to show English Answer</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cloze (Fill-in-the-blanks) Test -->
+                            <div class="cloze-test-container">
+                                <div class="cloze-header">
+                                    <h4>Syllabus Cloze Test</h4>
+                                    <p>Fill in the blanks using the vocabulary words from the syllabus.</p>
+                                </div>
+                                <div class="cloze-sentence" id="cloze-paragraph">
+                                    <!-- Sentence with drop downs or input fields -->
+                                </div>
+                                <div class="cloze-footer">
+                                    <button class="btn btn-outline btn-sm" id="cloze-check-btn">Verify Answers</button>
+                                    <span class="cloze-feedback" id="cloze-feedback-label"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel: Retelling Trainer -->
+                        <div class="panel qa-retell-panel">
+                            <div class="panel-header">
+                                <h3>🎙️ Answer Retelling Studio</h3>
+                                <span class="badge" id="qa-retell-score-badge">0% Coverage</span>
+                            </div>
+                            <p class="retell-guide">
+                                Practice explaining this topic orally or in writing. Speak or type your answer to verify your coverage of key concepts.
+                            </p>
+                            
+                            <div class="retell-audio-controls">
+                                <button class="btn btn-accent" id="qa-record-btn">
+                                    <span id="qa-record-icon">🎤</span> <span id="qa-record-text">Start Recording</span>
+                                </button>
+                                <span class="recording-status" id="qa-recording-status-msg">Click mic & start speaking in English...</span>
+                            </div>
+
+                            <div class="text-input-area">
+                                <textarea id="qa-retell-textarea" placeholder="Speak or start typing your answer here in English..."></textarea>
+                            </div>
+
+                            <div class="fact-checklist-section">
+                                <h4>Key Concepts & Phrases to Mention</h4>
+                                <ul class="fact-checklist" id="qa-fact-checklist-items">
+                                    <!-- Key words checklist -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script imports -->
+    <script src="app.js"></script>
+</body>
+</html>
